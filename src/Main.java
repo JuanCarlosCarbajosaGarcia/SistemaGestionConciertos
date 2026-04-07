@@ -17,21 +17,21 @@ public  class Main {
             String sqlDROPArtista = "DROP TABLE ARTISTA CASCADE CONSTRAINTS; ";
             try {
                 statement.executeUpdate(sqlDROPArtista);
-            }catch (Exception e){
+            }catch (SQLException e){
                 //ignora
             }
 
             String sqlDROPConcierto = "DROP TABLE CONCIERTO CASCADE CONSTRAINTS; ";
             try {
                 statement.executeUpdate(sqlDROPConcierto);
-            }catch (Exception e){
+            }catch (SQLException e){
                 //ignora
             }
 
             String sqlDROPEntrada = "DROP TABLE ENTRADA CASCADE CONSTRAINTS; ";
             try {
                 statement.executeUpdate(sqlDROPEntrada);
-            }catch (Exception e){
+            }catch (SQLException e){
                 //ignora
             }
 
