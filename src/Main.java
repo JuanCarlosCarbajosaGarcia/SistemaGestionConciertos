@@ -101,6 +101,7 @@ public  class Main {
                                 listarE();
                             break;
                             case 4:
+                                System.out.println("saliendo");
                                 sqlE = false;
                             break;
                             default: System.out.println("Opcion no permitida");
@@ -171,6 +172,9 @@ public  class Main {
             psConcierto.setDate(2, conciertofecha);
             psConcierto.setString(3, Lugar);
             psConcierto.setDouble(4, Precio);
+            psConcierto.executeUpdate();
+
+            System.out.println("concierto insertado");
 
         }catch(SQLException e){
 
