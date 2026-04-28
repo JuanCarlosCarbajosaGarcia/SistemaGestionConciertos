@@ -292,7 +292,8 @@ public  class Main {
         try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
             Statement st = conn.createStatement()) {
 
-            String sqlListar = "SELECT * FROM ARTISTA";
+            String sqlListarA = "SELECT * FROM ARTISTA";
+            System.out.println(sqlListarA);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -305,7 +306,8 @@ public  class Main {
         try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
             Statement st = conn.createStatement()) {
 
-            String sqlListar = "SELECT * FROM CONCIERTO";
+            String sqlListarC = "SELECT * FROM CONCIERTO";
+            System.out.println(sqlListarC);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -318,7 +320,8 @@ public  class Main {
         try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
             Statement st = conn.createStatement()) {
 
-            String sqlListar = "SELECT * FROM ENTRADA";
+            String sqlListarE = "SELECT * FROM ENTRADA";
+            System.out.println(sqlListarE);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
