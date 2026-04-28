@@ -101,7 +101,6 @@ public  class Main {
                                 listarE();
                             break;
                             case 4:
-                                System.out.println("saliendo");
                                 sqlE = false;
                             break;
                             default: System.out.println("Opcion no permitida");
@@ -109,6 +108,7 @@ public  class Main {
                     }
                 break;
                 case 4:
+                    System.out.println("saliendo");
                     sql = false;
                 break;
                 default: System.out.println("Opcion no permitida");
@@ -131,7 +131,7 @@ public  class Main {
         System.out.print("Ingresa el pais de origen: ");
         String Pais = scA.nextLine();
 
-        String sqlArtista = "INSERT INTO ARTISTA (NOMBRE, GENERO, PAIS) VALUES (?, ?, ?)";
+        String sqlArtista = "INSERT INTO ARTISTA (NOMBRE, GENEROMUSICAL, PAISORIGEN) VALUES (?, ?, ?)";
         PreparedStatement psArtista = conn.prepareStatement(sqlArtista);
         psArtista.setString(1, Nombre);
         psArtista.setString(2, Genero);
@@ -293,7 +293,7 @@ public  class Main {
             Statement st = conn.createStatement()) {
 
             String sqlListarA = "SELECT * FROM ARTISTA";
-            System.out.println(sqlListarA);
+            st.executeQuery(sqlListarA);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -307,7 +307,7 @@ public  class Main {
             Statement st = conn.createStatement()) {
 
             String sqlListarC = "SELECT * FROM CONCIERTO";
-            System.out.println(sqlListarC);
+            st.executeQuery(sqlListarC);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
@@ -321,7 +321,7 @@ public  class Main {
             Statement st = conn.createStatement()) {
 
             String sqlListarE = "SELECT * FROM ENTRADA";
-            System.out.println(sqlListarE);
+            st.executeQuery(sqlListarE);
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
