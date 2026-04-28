@@ -293,4 +293,30 @@ public  class Main {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    private static void listarC(){
+        String url = "jdbc:oracle:thin:@localhost:1521:xe";
+        String usuario = "RIBERA";
+        String contraseña = "ribera";
+
+        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
+            Statement st = conn.createStatement()) {
+
+            String sqlListar = "SELECT * FROM CONCIERTO";
+        }catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+    private static void listarE(){
+        String url = "jdbc:oracle:thin:@localhost:1521:xe";
+        String usuario = "RIBERA";
+        String contraseña = "ribera";
+
+        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
+            Statement st = conn.createStatement()) {
+
+            String sqlListar = "SELECT * FROM ENTRADA";
+        }catch (SQLException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
 }
