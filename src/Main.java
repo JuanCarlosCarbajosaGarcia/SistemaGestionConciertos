@@ -1,6 +1,4 @@
 import java.sql.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 public  class Main {
@@ -38,13 +36,13 @@ public  class Main {
                         menuA = sc.nextInt();
                         switch(menuA){
                             case 1:
-                                insertarDatosA();
+                                artista.insertarDatosA();
                             break;
                             case 2:
-                                eliminarDatosA();
+                                artista.eliminarDatosA();
                             break;
                             case 3:
-                                listarA();
+                                artista.listarA();
                             break;
                             case 4:
                                 sqlA = false;
@@ -65,13 +63,13 @@ public  class Main {
                         menuC = sc.nextInt();
                         switch(menuC){
                             case 1:
-                                insertarDatosC();
+                                concierto.insertarDatosC();
                             break;
                             case 2:
-                                eliminarDatosC();
+                                concierto.eliminarDatosC();
                             break;
                             case 3:
-                                listarC();
+                                concierto.listarC();
                             break;
                             case 4:
                                 sqlC = false;
@@ -92,13 +90,13 @@ public  class Main {
                         menuE = sc.nextInt();
                         switch(menuE){
                             case 1:
-                                insertarDatosE();
+                                entrada.insertarDatosE();
                             break;
                             case 2:
-                                eliminarDatosE();
+                                entrada.eliminarDatosE();
                             break;
                             case 3:
-                                listarE();
+                                entrada.listarE();
                             break;
                             case 4:
                                 sqlE = false;
@@ -113,217 +111,6 @@ public  class Main {
                 break;
                 default: System.out.println("Opcion no permitida");
             }
-        }
-    }
-
-    private static void insertarDatosA() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-        try (Connection conn = DriverManager.getConnection(url, usuario, contraseña);
-             Statement statement = conn.createStatement()) {
-        Scanner scA = new Scanner(System.in);
-        System.out.println("Ingresa los datos del artista");
-        System.out.print("Ingresa el nombre del artista: ");
-        String Nombre = scA.nextLine();
-        System.out.print("Ingresa el genero musical: ");
-        String Genero = scA.nextLine();
-        System.out.print("Ingresa el pais de origen: ");
-        String Pais = scA.nextLine();
-
-        String sqlArtista = "INSERT INTO ARTISTA (NOMBRE, GENEROMUSICAL, PAISORIGEN) VALUES (?, ?, ?)";
-        PreparedStatement psArtista = conn.prepareStatement(sqlArtista);
-        psArtista.setString(1, Nombre);
-        psArtista.setString(2, Genero);
-        psArtista.setString(3, Pais);
-        psArtista.executeUpdate();
-
-            System.out.println("artista insertado");
-        }catch(SQLException e){
-
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    private static void insertarDatosC() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-        try (Connection conn = DriverManager.getConnection(url, usuario, contraseña);
-             Statement statement = conn.createStatement()) {
-            Scanner scC = new Scanner(System.in);
-
-            System.out.println("Ingresa los datos del concierto: ");
-            System.out.print("Ingresa el id del artista: ");
-            int Artista = scC.nextInt();
-            System.out.print("Ingresa la fecha del concierto(DD/MM/YYYY): ");
-            String Fecha = scC.next();
-            System.out.print("Ingresa el lugar del concierto: ");
-            String Lugar = scC.nextLine();
-            System.out.print("Ingresa el precio de la entrada: ");
-            double Precio = scC.nextDouble();
-
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate fecha = LocalDate.parse(Fecha,formatter);
-            Date conciertofecha = java.sql.Date.valueOf(fecha);
-
-            String sqlConcierto = "INSERT INTO CONCIERTO (ARTISTA_ID, FECHA, LUGAR, PRECIOENTRADA) VALUES (?, ?, ?,?)";
-            PreparedStatement psConcierto = conn.prepareStatement(sqlConcierto);
-            psConcierto.setInt(1, Artista);
-            psConcierto.setDate(2, conciertofecha);
-            psConcierto.setString(3, Lugar);
-            psConcierto.setDouble(4, Precio);
-            psConcierto.executeUpdate();
-
-            System.out.println("concierto insertado");
-
-        }catch(SQLException e){
-
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    private static void insertarDatosE() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-        try (Connection conn = DriverManager.getConnection(url, usuario, contraseña);
-             Statement statement = conn.createStatement()) {
-            Scanner scE = new Scanner(System.in);
-
-            System.out.println("Ingresa los datos del entrada: ");
-            System.out.print("id del concierto: ");
-            int Concierto = scE.nextInt();
-            System.out.print("nombre del comprador: ");
-            String Comprador = scE.nextLine();
-            System.out.print("cantidad de entradas: ");
-            int Cantidad = scE.nextInt();
-
-            LocalDate fecha = LocalDate.now();
-            Date compraEntrada = java.sql.Date.valueOf(fecha);
-
-            String sqlEntrada = "INSERT INTO ENTRADA (CONCIERTO_ID, COMPRADOR, CANTIDAD, FECHACOMPRA) VALUES (?, ?, ?, ?)";
-            PreparedStatement psEntrada = conn.prepareStatement(sqlEntrada);
-            psEntrada.setInt(1, Concierto);
-            psEntrada.setString(2, Comprador);
-            psEntrada.setInt(3, Cantidad);
-            psEntrada.setDate(4, compraEntrada);
-            psEntrada.executeUpdate();
-
-            System.out.println("entrada insertado");
-
-        }catch(SQLException e){
-
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void eliminarDatosA() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-        Statement st = conn.createStatement()) {
-            Scanner scDelA = new Scanner(System.in);
-            System.out.print("ingrese el artista del artista a eliminar: ");
-            int artista = scDelA.nextInt();
-
-            String SQLEliminar = "DELETE FROM ARTISTA WHERE ID = ?";
-            PreparedStatement psDelA = conn.prepareStatement(SQLEliminar);
-            psDelA.setInt(1, artista);
-            psDelA.executeUpdate();
-
-            System.out.println("eliminado");
-
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void eliminarDatosC() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-            Statement st = conn.createStatement()) {
-            Scanner scDelC = new Scanner(System.in);
-            System.out.print("ingrese el id del concierto a eliminar: ");
-            int concierto = scDelC.nextInt();
-
-            String SQLEliminar = "DELETE FROM CONCIERTO WHERE ID = ?";
-            PreparedStatement psDelC = conn.prepareStatement(SQLEliminar);
-            psDelC.setInt(1, concierto);
-            psDelC.executeUpdate();
-
-            System.out.println("eliminado");
-
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-
-    private static void eliminarDatosE() {
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-            Statement st = conn.createStatement()) {
-            Scanner scDelE = new Scanner(System.in);
-            System.out.print("ingrese el id del concierto a eliminar: ");
-            int concierto = scDelE.nextInt();
-
-            String SQLEliminar = "DELETE FROM ENTRADA WHERE ID = ?";
-            PreparedStatement psDelE = conn.prepareStatement(SQLEliminar);
-            psDelE.setInt(1, concierto);
-            psDelE.executeUpdate();
-
-            System.out.println("eliminado");
-
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    private static void listarA(){
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-            Statement st = conn.createStatement()) {
-
-            String sqlListarA = "SELECT * FROM ARTISTA";
-            st.executeQuery(sqlListarA);
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    private static void listarC(){
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-            Statement st = conn.createStatement()) {
-
-            String sqlListarC = "SELECT * FROM CONCIERTO";
-            st.executeQuery(sqlListarC);
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
-        }
-    }
-    private static void listarE(){
-        String url = "jdbc:oracle:thin:@localhost:1521:xe";
-        String usuario = "RIBERA";
-        String contraseña = "ribera";
-
-        try(Connection conn = DriverManager.getConnection(url,usuario,contraseña);
-            Statement st = conn.createStatement()) {
-
-            String sqlListarE = "SELECT * FROM ENTRADA";
-            st.executeQuery(sqlListarE);
-        }catch (SQLException e){
-            System.out.println("Error: " + e.getMessage());
         }
     }
 }
