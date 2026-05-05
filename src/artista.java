@@ -63,7 +63,15 @@ public class artista {
             Statement st = conn.createStatement()) {
 
             String sqlListarA = "SELECT * FROM ARTISTA";
-            st.executeQuery(sqlListarA);
+            ResultSet rs = st.executeQuery(sqlListarA);
+
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                String Nombre = rs.getString("NOMBRE");
+                String Genero = rs.getString("GENEROMUSICAL");
+                String Pais = rs.getString("PAISORIGEN");
+                System.out.println(id + " " + Nombre + " " + Genero + " " + Pais);
+            }
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }

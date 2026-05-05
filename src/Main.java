@@ -31,7 +31,7 @@ public  class Main {
                         System.out.println("1. crear artista");
                         System.out.println("2. eliminar artista");
                         System.out.println("3. listar artistas");
-                        System.out.println("4. salir");
+                        System.out.println("4. volver");
                         System.out.print("que desea hacer: ");
                         menuA = sc.nextInt();
                         switch(menuA){
@@ -45,6 +45,7 @@ public  class Main {
                                 artista.listarA();
                             break;
                             case 4:
+                                System.out.println("volviendo");
                                 sqlA = false;
                             break;
                             default: System.out.println("Opcion no permitida");
@@ -58,7 +59,7 @@ public  class Main {
                         System.out.println("1. crear concierto");
                         System.out.println("2. eliminar concierto");
                         System.out.println("3. listar conciertos");
-                        System.out.println("4. salir");
+                        System.out.println("4. volver");
                         System.out.print("que desea hacer: ");
                         menuC = sc.nextInt();
                         switch(menuC){
@@ -72,6 +73,7 @@ public  class Main {
                                 concierto.listarC();
                             break;
                             case 4:
+                                System.out.println("volviendo");
                                 sqlC = false;
                             break;
                             default: System.out.println("Opcion no permitida");
@@ -85,7 +87,7 @@ public  class Main {
                         System.out.println("1. crear entrada");
                         System.out.println("2. eliminar entrada");
                         System.out.println("3. listar entradas");
-                        System.out.println("4. salir");
+                        System.out.println("4. volver");
                         System.out.print("que desea hacer: ");
                         menuE = sc.nextInt();
                         switch(menuE){
@@ -99,6 +101,7 @@ public  class Main {
                                 entrada.listarE();
                             break;
                             case 4:
+                                System.out.println("volviendo");
                                 sqlE = false;
                             break;
                             default: System.out.println("Opcion no permitida");

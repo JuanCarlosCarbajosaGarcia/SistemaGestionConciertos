@@ -70,7 +70,17 @@ public class entrada {
             Statement st = conn.createStatement()) {
 
             String sqlListarE = "SELECT * FROM ENTRADA";
-            st.executeQuery(sqlListarE);
+            ResultSet  rs = st.executeQuery(sqlListarE);
+
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                int idconcierto = rs.getInt("CONCIERTO_ID");
+                String comprador = rs.getString("COMPRADOR");
+                int cantidad = rs.getInt("CANTIDAD");
+                Date fecha = rs.getDate("FECHACOMPRA");
+
+                System.out.println(id + " " + idconcierto + " " + comprador + " " + cantidad + " " + fecha);
+            }
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }

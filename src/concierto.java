@@ -74,7 +74,16 @@ public class concierto {
             Statement st = conn.createStatement()) {
 
             String sqlListarC = "SELECT * FROM CONCIERTO";
-            st.executeQuery(sqlListarC);
+            ResultSet rs = st.executeQuery(sqlListarC);
+            while(rs.next()){
+                int id = rs.getInt("ID");
+                int Artista = rs.getInt("ARTISTA_ID");
+                String Fecha = rs.getString("FECHA");
+                String Lugar = rs.getString("LUGAR");
+                double Precio = rs.getDouble("PRECIOENTRADA");
+
+                System.out.println(id + " " + Artista + " " + Fecha + " " + Lugar + " " + Precio);
+            }
         }catch (SQLException e){
             System.out.println("Error: " + e.getMessage());
         }
